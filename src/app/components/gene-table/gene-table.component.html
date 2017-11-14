@@ -1,0 +1,29 @@
+<mat-table #table [dataSource]="dataSource">
+  <ng-container matColumnDef="gene_id">
+    <mat-header-cell *matHeaderCellDef>Gene Id</mat-header-cell>
+    <mat-cell *matCellDef="let gene">{{gene.gene_id}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="gene_symbol">
+    <mat-header-cell *matHeaderCellDef>Gene Symbol</mat-header-cell>
+    <mat-cell *matCellDef="let gene">{{gene.gene_symbol}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="description">
+    <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+    <mat-cell *matCellDef="let gene">{{gene.description}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="chromosome">
+    <mat-header-cell *matHeaderCellDef>Chromosome</mat-header-cell>
+    <mat-cell *matCellDef="let gene">{{gene.chromosome}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="start">
+    <mat-header-cell *matHeaderCellDef>Start</mat-header-cell>
+    <mat-cell *matCellDef="let gene">{{gene.start}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="end">
+    <mat-header-cell *matHeaderCellDef>End</mat-header-cell>
+    <mat-cell *matCellDef="let gene">{{gene.end}}</mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: columns;"></mat-row>
+</mat-table>
