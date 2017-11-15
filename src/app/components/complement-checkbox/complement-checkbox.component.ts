@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, OnInit, ViewEncapsulation, Input, Output, EventEmitter } from "@angular/core";
 
 @Component({
   selector: "app-complement-checkbox",
@@ -7,10 +7,14 @@ import { Component, OnInit, ViewEncapsulation } from "@angular/core";
   encapsulation: ViewEncapsulation.None
 })
 export class ComplementCheckboxComponent implements OnInit {
-  checked: boolean = false;
-  disabled: boolean = false;
+  @Output() onChangeReverse: EventEmitter<any> = new EventEmitter();
 
   constructor() {}
 
   ngOnInit() {}
+
+  changeReverse(reverseValue) {
+    // have to emit opposite because click event emits before value changes
+    this.onChangeReverse.emit(!reverseValue);
+  }
 }

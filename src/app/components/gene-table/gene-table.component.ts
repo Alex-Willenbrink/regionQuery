@@ -3,7 +3,9 @@ import {
   OnInit,
   Input,
   OnChanges,
-  SimpleChanges
+  SimpleChanges,
+  Output,
+  EventEmitter
 } from "@angular/core";
 import { MatTableDataSource } from "@angular/material";
 import { Gene } from "../../classes/Gene";
@@ -15,6 +17,9 @@ import { Gene } from "../../classes/Gene";
 })
 export class GeneTableComponent implements OnInit, OnChanges {
   @Input() genes: Gene[];
+  @Input() selectedGene: Gene;
+
+  @Output() onSelectGene: EventEmitter<any> = new EventEmitter();
 
   dataSource;
 
@@ -27,50 +32,22 @@ export class GeneTableComponent implements OnInit, OnChanges {
     "end"
   ];
 
-  ngOnChanges(changes: SimpleChanges) {
-    console.log("changing");
-    this.dataSource = new MatTableDataSource(this.genes);
-  }
-
-  // dataSource = new MatTableDataSource(this.genes);
-
   constructor() {}
 
   ngOnInit() {}
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.dataSource = new MatTableDataSource(this.genes);
+  }
+
+  selectGene(gene: Gene) {
+    this.onSelectGene.emit(gene);
+  }
+
+  changeRowClass(row): boolean {
+    if (this.selectedGene) {
+      return this.selectedGene.gene_id === row.gene_id;
+    }
+    return false;
+  }
 }
-
-// export class Gene {
-//   gene_id: string;
-//   gene_symbol: string;
-//   description: string;
-//   chromosome: number;
-//   start: number;
-//   end: number;
-// }
-
-// const GENE_DATA: Gene[] = [
-//   {
-//     gene_id: "1",
-//     gene_symbol: "GREAT",
-//     description: "a great gene",
-//     chromosome: 8,
-//     start: 5,
-//     end: 9
-//   },
-//   {
-//     gene_id: "1",
-//     gene_symbol: "GREAT",
-//     description: "a great gene",
-//     chromosome: 8,
-//     start: 5,
-//     end: 9
-//   },
-//   {
-//     gene_id: "1",
-//     gene_symbol: "GREAT",
-//     description: "a great gene",
-//     chromosome: 8,
-//     start: 5,
-//     end: 9
-//   }
-// ];

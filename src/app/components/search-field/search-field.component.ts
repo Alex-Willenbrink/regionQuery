@@ -6,12 +6,14 @@ import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
   styleUrls: ["./search-field.component.css"]
 })
 export class SearchFieldComponent implements OnInit {
+  searchText: string = "";
+
   @Output() onInputChange: EventEmitter<string> = new EventEmitter();
 
   constructor() {}
 
-  inputChange(searchText) {
-    this.onInputChange.emit(searchText);
+  inputChange() {
+    this.onInputChange.emit(this.searchText);
   }
 
   ngOnInit() {}

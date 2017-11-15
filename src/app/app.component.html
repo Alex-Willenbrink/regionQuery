@@ -1,6 +1,22 @@
+
 <div class="main-container">
-  <app-query-container (onSearch)="onSearch($event)"></app-query-container>
-  <app-gene-table [genes]="genes"></app-gene-table>
-  <app-complement-checkbox></app-complement-checkbox>
-  <app-sequence-container></app-sequence-container>
+  <app-query-container class="query-container sub-container" (onSearch)="onSearch($event)"></app-query-container>
+  <div class="table-container mat-elevation-z5 sub-container">
+    <app-gene-table [genes]="genes" (onSelectGene)="onSelectGene($event)" [selectedGene]="selectedGene"></app-gene-table>
+  </div>
+  <div class="dna-options-container sub-container">
+    <p class="dna-option" id="gene-label" *ngIf="selectedGene">DNA Sequence for Gene: <strong>{{selectedGene.gene_symbol}}</strong></p>
+    <app-complement-checkbox class="dna-option" (onChangeReverse)="onChangeReverse($event)"></app-complement-checkbox>
+  </div>
+
+  <!-- <div *ngIf="loadingGenes">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <div *ngIf="loadingSequence">
+    <mat-spinner></mat-spinner>
+  </div> -->
+  <div class="sequence-container sub-container">
+    <app-sequence-container [sequence]="sequence"></app-sequence-container>
+  </div>
 </div>

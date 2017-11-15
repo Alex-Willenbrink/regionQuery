@@ -1,5 +1,5 @@
 <div class="query-container">
-  <app-species-dropdown (onSpeciesChange)="onSpeciesChange($event)"></app-species-dropdown>
-  <app-search-field (onInputChange)="onInputChange($event)"></app-search-field>
-  <app-search-button (onSearchClick)="onSearchClick($event)"></app-search-button>
+  <app-species-dropdown class="search-item" [selectionError]="selectionError" (onSpeciesChange)="onSpeciesChange($event)"></app-species-dropdown>
+  <app-search-field class="search-item" (onInputChange)="onInputChange($event)"></app-search-field>
+  <app-search-button class="search-item" (onSearchClick)="onSearchClick($event)"></app-search-button>
 </div>

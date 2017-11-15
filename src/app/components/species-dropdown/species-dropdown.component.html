@@ -1,5 +1,6 @@
 <mat-form-field>
   <mat-select #speciesText (change)="changeSpecies(speciesText)" placeholder="Species">
-    <mat-option *ngFor="let spec of species" [value]="spec">{{spec}}</mat-option>
+    <mat-option *ngFor="let speciesObj of species" [value]="speciesObj.value">{{speciesObj.label}}</mat-option>
   </mat-select>
+  <mat-hint class="error" *ngIf="selectionError">{{selectionError}}</mat-hint>
 </mat-form-field>

@@ -1,0 +1,35 @@
+.mat-row {
+  cursor: pointer;
+}
+
+.selected {
+  background-color: #4fc3f7;
+}
+
+.mat-row:hover {
+  background-color: #b3e5fc;
+}
+
+.mat-row.selected:hover {
+  background-color: #29b6f6;
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 50vh;
+}
+
+.mat-header-cell {
+  color: white;
+}
+
+.mat-header-row {
+  background-color: #4152b4;
+  border-bottom: 2px solid #4152b4;
+  position: sticky;
+  top: 0;
+}
+
+.mat-cell {
+  padding: 5px 10px 5px 0px;
+}

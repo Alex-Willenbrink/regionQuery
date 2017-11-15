@@ -9,11 +9,11 @@ export class GeneticQueriesService {
 
   constructor(private http: HttpClient) {}
 
-  // getGeneSequence(geneId: string): void {
-  //   this.http
-  //     .get(`${this.base_url}/sequence/id/${geneId}?${this.json_param}`)
-  //     .subscribe(result => console.log(result), err => console.log(err));
-  // }
+  getGeneSequence(geneId: string): Observable<Object> {
+    return this.http.get(
+      `${this.base_url}/sequence/id/${geneId}?${this.json_param}`
+    );
+  }
 
   // getGeneSequences(): void {
   //   const url = `${this.base_url}/sequence/id?${this.json_param}`;
@@ -36,7 +36,5 @@ export class GeneticQueriesService {
         .base_url}/overlap/region/${species}/${sequenceQuery}?feature=gene;${this
         .json_param}`
     );
-
-    // .subscribe(result => console.log(result), err => console.log(err));
   }
 }

@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import { Component, OnInit, Output, EventEmitter, Inject } from "@angular/core";
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({
   selector: "app-query-container",
@@ -8,11 +9,19 @@ import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 export class QueryContainerComponent implements OnInit {
   @Output() onSearch = new EventEmitter<any>();
 
+  selectionError: string = null;
+
   searchText: string;
   species: string;
-  constructor() {}
+  constructor(public dialog: MatDialog) {}
 
   ngOnInit() {}
+
+  openDialog() {
+    this.dialog.open(DialogBoxComponent, {
+    });
+  }
+
 
   onInputChange(searchText: string) {
     this.searchText = searchText;
@@ -20,18 +29,26 @@ export class QueryContainerComponent implements OnInit {
 
   onSpeciesChange(species: string) {
     this.species = species;
+    this.selectionError = null;
+    // this.openDialog();
   }
 
   onSearchClick() {
-    this.onSearch.emit({
-      species: this.species,
-      sequenceQuery: this.searchText
-    });
+    if(!this.species) {
+      this.selectionError = "Please select species";
+    } else {
+      this.onSearch.emit({
+        species: this.species,
+        sequenceQuery: this.searchText
+      });
+    }
   }
 }
 
-/*
-- species-dropdown
-- search-field
-- search-button
- */
+@Component({
+  selector: 'app-dialog-overview-example-dialog',
+  templateUrl: 'dialog-box.component.html',
+})
+export class DialogBoxComponent {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
+}

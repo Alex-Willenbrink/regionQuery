@@ -8,28 +8,43 @@ import { Gene } from "./classes/Gene";
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
-  title = "app";
   genes: Gene[] = [];
+  selectedGene: Gene;
+  sequence: string;
+  reverse: boolean = false;
+  loading: boolean = false;
+  loadingGenes: boolean = false;
+  loadingSequence: boolean = false;
 
   constructor(private geneticQueriesService: GeneticQueriesService) {}
 
-  ngOnInit() {
-    // this.geneticQueriesService.getGeneSequence("ENSG00000146955");
-    // this.geneticQueriesService.getOverlapRegions(
-    //   "human",
-    //   "7:140424943-140624564"
-    // );
+  ngOnInit() {}
+
+  setDefaultValues() {
+    this.sequence = "";
+    this.selectedGene = null;
+    this.genes = [];
   }
 
   onSearch(searchObj) {
-    const searchObjExample = {
-      species: "human",
-      sequenceQuery: "7:140424943-140624564"
-    };
-    // console.log("searchObj: ", searchObj);
-    this.geneticQueriesService
-      .getOverlapRegions(searchObjExample)
-      .subscribe(result => this.changeGenes(result), err => console.log(err));
+    this.setDefaultValues();
+    this.loadingGenes = true;
+    this.geneticQueriesService.getOverlapRegions(searchObj).subscribe(
+      result => {
+        this.changeGenes(result);
+        if (this.genes.length < 1) {
+          alert("No genes found in that slice");
+        }
+      },
+      err => {
+        if (err.error) {
+          alert(err.error.error);
+        } else {
+          alert(err.statusText);
+        }
+      }
+    );
+    this.loadingGenes = false;
   }
 
   changeGenes(geneArr: any) {
@@ -44,6 +59,50 @@ export class AppComponent {
           geneObj.end
         )
     );
-    console.log("genes: ", this.genes);
+  }
+
+  changeSequence(): void {
+    if (this.selectedGene && this.selectedGene["seq"]) {
+      this.sequence = this.reverse
+        ? this.selectedGene["seq_rev"]
+        : this.selectedGene["seq"];
+    }
+  }
+
+  onSelectGene(gene: Gene): void {
+    this.loadingSequence = true;
+    this.selectedGene = gene;
+
+    // if we haven't cached sequence for gene
+    if (!this.selectedGene.seq) {
+      this.geneticQueriesService
+        .getGeneSequence(this.selectedGene.gene_id)
+        .subscribe(
+          geneSeqObj => {
+            this.selectedGene = this.genes.find(
+              gene => gene.gene_id === geneSeqObj["id"]
+            );
+            this.selectedGene.setSequence(geneSeqObj["seq"]);
+            this.changeSequence();
+            this.loadingSequence = false;
+          },
+          err => {
+            if (err.error) {
+              alert(err.error.error);
+            } else {
+              alert(err.statusText);
+            }
+            this.loadingSequence = false;
+          }
+        );
+    } else {
+      this.changeSequence();
+      this.loadingSequence = false;
+    }
+  }
+
+  onChangeReverse(reverseValue: boolean) {
+    this.reverse = reverseValue;
+    this.changeSequence();
   }
 }

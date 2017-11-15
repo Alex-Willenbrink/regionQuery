@@ -1,4 +1,4 @@
-
-  <mat-form-field>
-    <input #searchText (keyup)="inputChange(searchText.value)" matInput placeholder="Region" [(ngModel)]="region" />
-  </mat-form-field>
+<mat-form-field class="input-container">
+  <input placeholder="Region" matInput [(ngModel)]="searchText" (ngModelChange)="inputChange($event)" />
+  <mat-hint>chromsome:start-end</mat-hint>
+</mat-form-field>

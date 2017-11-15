@@ -1,0 +1,50 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.query-container {
+  width: 80%;
+}
+
+.table-container {
+  width: 80%;
+  height: 50vh;
+  border: 2px #4152b4 solid;
+  min-width: 800px;
+  border-radius: 2px;
+}
+
+.sequence-container {
+  width: 80%;
+  height: 20vh;
+  border: 2px #4152b4 solid;
+  min-width: 800px;
+  border-radius: 2px;
+  overflow: auto;
+}
+
+.sub-container {
+  margin: 15px 0px;
+}
+
+.dna-options-container {
+  width: 80%;
+  min-width: 800px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 0px;
+  align-items: flex-end;
+}
+
+.dna-option {
+  margin: 0 20px;
+}
+
+#gene-label {
+  padding: 0px;
+  margin: 0px;
+}

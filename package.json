@@ -23,10 +23,13 @@
     "@angular/platform-browser": "^5.0.0",
     "@angular/platform-browser-dynamic": "^5.0.0",
     "@angular/router": "^5.0.0",
+    "angular-sweetalert": "^1.1.2",
+    "angular-sweetalert-service": "^2.0.2",
     "core-js": "^2.4.1",
     "ng-sidebar": "^6.0.4",
     "ng2-select": "^1.2.0",
     "rxjs": "^5.5.2",
+    "sweetalert2": "^6.11.5",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {

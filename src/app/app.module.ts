@@ -10,6 +10,8 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatButtonModule } from "@angular/material/button";
 import { MatTableModule } from "@angular/material/table";
 import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { MatDialogModule } from "@angular/material/dialog";
 
 import { AppComponent } from "./app.component";
 import { SpeciesDropdownComponent } from "./components/species-dropdown/species-dropdown.component";
@@ -19,9 +21,10 @@ import { GeneTableComponent } from "./components/gene-table/gene-table.component
 import { ComplementCheckboxComponent } from "./components/complement-checkbox/complement-checkbox.component";
 import { SequenceContainerComponent } from "./components/sequence-container/sequence-container.component";
 import { GeneticQueriesService } from "./services/genetic-queries/genetic-queries.service";
-import { QueryContainerComponent } from "./components/query-container/query-container.component";
-
-// import { Gene } from "./classes/Gene";
+import {
+  QueryContainerComponent,
+  DialogBoxComponent
+} from "./components/query-container/query-container.component";
 
 @NgModule({
   declarations: [
@@ -32,7 +35,8 @@ import { QueryContainerComponent } from "./components/query-container/query-cont
     GeneTableComponent,
     ComplementCheckboxComponent,
     SequenceContainerComponent,
-    QueryContainerComponent
+    QueryContainerComponent,
+    DialogBoxComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +48,9 @@ import { QueryContainerComponent } from "./components/query-container/query-cont
     MatFormFieldModule,
     MatButtonModule,
     MatTableModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatProgressSpinnerModule,
+    MatDialogModule
   ],
   providers: [GeneticQueriesService],
   bootstrap: [AppComponent]
